@@ -1,5 +1,26 @@
-{% extends 'layout/base.html' %}
-
-{% block content %}
-    <h4 >Hellow fundraisers</h4>
+{% extends 'layout/base.html' %} {% block content %}
+<div class="user">
+  <div class="user__content">
+    <div class="user__profile">
+      <img
+        src="https://picsum.photos/200/300"
+        alt=""
+        class="user__profile--img"
+      />
+    </div>
+    <div class="user__description">
+      <div class="user__description--title">
+        <p>Hi There, My name is <span> John Doe</span></p>
+      </div>
+      <div class="user__description--para">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim facilis
+        ducimus iusto deleniti, sed maxime reiciendis libero. Error corporis
+        consequatur repudiandae rem! Eum magni assumenda laborum voluptatem
+        nobis dolorum! Quos mollitia vel corporis voluptatum molestias. Nemo
+        reprehenderit ea neque amet?
+      </div>
+    </div>
+    <a href="{% url 'donate' %}" class="btn btn-primary">But me coffee</a>
+  </div>
+</div>
 {% endblock %}
