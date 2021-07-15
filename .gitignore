@@ -1,6 +1,7 @@
 # Custom
 .idea/
 keys.py
+devs
 
 # Config folder
 .secrets/
