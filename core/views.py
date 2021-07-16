@@ -41,6 +41,9 @@ def donate(request):
         return redirect(redirect_url)
 
     return redirect(redirect_url)
-    
+
+
+def handleCallback(request):
+     return HttpResponse('Results from beem')
     
     
