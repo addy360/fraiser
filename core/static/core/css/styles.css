@@ -71,6 +71,32 @@ html{
     min-width: 550px;
   }
 
+  .user__content--intro {
+    font-size: 4rem;
+    font-weight: lighter;
+  }
+
+  .user__content--intro span{
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #333;
+    display: block;
+  }
+
+  .user__content--intro a{
+    font-size: 2rem;
+    font-weight: lighter;
+    color: #333;
+    display: block;
+    text-decoration: none;
+    transition: .25s;
+  }
+
+  .user__content--intro a:hover{
+
+    color: var(--primary-dark) ;
+  }
+
  .user__profile {
     width: 100px;
     height: 100px;

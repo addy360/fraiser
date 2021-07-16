@@ -4,6 +4,11 @@ from core.utils import extract_redirect, generateReferenceNo, initiateRequest, v
 from django.http.response import  HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import redirect, render
 
+def home(request):
+    profiles = Profile.objects.select_related('user').all()
+    context = { "profiles":profiles }
+    return render(request,'pages/home.html', context)
+    
  
 
 def index(request, username):

@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %} {% block content %}
+<div class="user">
+  <div class="user__content">
+    <p class="user__content--intro" >
+      Help us help more others. Let us build a better world together 
+      <span>#EveryOneHasRightToLive</span>
+      {% for profile in profiles %}
+         <a href ="{% url 'index' profile.user.username %}" >Click here for more info<a/>
+      {% endfor %}
+    </p>
+  </div>
+</div>
+{% endblock %}
