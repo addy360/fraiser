@@ -42,6 +42,14 @@ html{
     color: var(--primary-dark);
  }
 
+ .main__header--link{
+  font-size: 1rem;
+  margin-left: 2rem;
+  font-weight: lighter;
+  color: #333;
+  text-decoration: none;
+}
+
  .user {
   
    margin: 1rem 0;
