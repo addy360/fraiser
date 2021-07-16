@@ -73,8 +73,23 @@ def donate(request, profile_id):
 
     return redirect(redirect_url)
 
-
+# hopefuly it works coz im in position to test this thing now
 def handleCallback(request):
-     return HttpResponse('Results from beem')
+    status = request.POST.get('status')
+    amount = request.POST.get('amount')
+    referenceNumber = request.POST.get('referenceNumber')
+    statusMessage = request.POST.get('statusMessage')
+    transactionID = request.POST.get('transactionID')
+
+    if not status :
+        return HttpResponse('Failed to process your donation')
+
+    donation = Donation.objects.filter(transaction_id = transactionID)
+
+    donation.is_completed = True
+
+    donation.update()
+
+    return HttpResponse('Thank you for your kind heart')
     
     
