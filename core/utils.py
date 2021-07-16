@@ -1,9 +1,13 @@
 import base64
 import requests
 import json
-import keys
 import time
 import math
+
+try:
+    import keys
+except :
+    raise ImportError('Make sure you have "keys.py" in the root directory. Create it from "keys.py.example"')
 
 def encodeToB6(val):
     return base64.b64encode( bytes(val,'utf8')).decode('utf8')
