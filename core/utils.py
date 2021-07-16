@@ -1,6 +1,6 @@
 import base64
 import requests
-import uuid
+import json
 import keys
 
 def encodeToB6(val):
@@ -12,7 +12,7 @@ def getAuthHeader(credentials):
     auth = encodeToB6(auth)
     return f'Basic {auth}'
 
-def initiateRequest():
+def initiateRequest( payload):
     url = "https://checkout.beem.africa/v1/checkout"
 
     api_creds = {
@@ -25,14 +25,15 @@ def initiateRequest():
         "Authorization": authorization_header
     }
 
-    payload = {
-        'amount': 1000,
-        'reference_number': 'product_1234',
-        'transaction_id': uuid.uuid4(),
-        'sendSource': True,
-        'mobile': '25509876554',
-    }
-    return requests.get(url, headers=headers, params=payload)
+  
+
+    try:
+        return requests.get(url, headers=headers, params=payload)
+    except Exception as e:
+        print(e.args)
+        return False
+
+
 
 
 # form validations
@@ -62,6 +63,10 @@ def should_be_greater_than_3(value):
     if not is_greater_than(value, 3):
         return "Should have three letters or more"
 
+def should_be_greater_than_12(value):
+    if not is_greater_than(value, 12):
+        return "Including '255...' your number should include twelve digits"
+
 
 
 def validator_executor(field_name, value, validators=[]):
@@ -84,7 +89,7 @@ def validate_post_data(request):
 
     form_data = [
         {'mobile': mobile, 'validators': [
-            should_be_string, should_be_greater_than_3]},
+            should_be_string, should_be_greater_than_12]},
         {'amount': amount, 'validators': [
             should_be_string, should_be_greater_than_3]},
         {'donator': donator, 'validators': [
@@ -108,6 +113,19 @@ def validate_post_data(request):
     }
 
     return errors, cleanValues
+
+# helpers
+
+def extract_redirect(res):
+    res_content = res.content.decode('utf8')
+    
+    try:
+        return json.loads(res_content)['src']
+    except Exception as e:
+        print(e.args)
+        return False
+
+   
 
 
     
