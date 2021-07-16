@@ -3,24 +3,20 @@
   <div class="user__content">
     <div class="user__profile">
       <img
-        src="https://picsum.photos/200/300"
+        src="{{ profile.profile_img.url }}"
         alt=""
         class="user__profile--img"
       />
     </div>
     <div class="user__description">
       <div class="user__description--title">
-        <p>Hi There, My name is <span> John Doe</span></p>
+        <p>Hi There, My name is <span> {{ profile.user.username }} </span></p>
       </div>
       <div class="user__description--para">
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Enim facilis
-        ducimus iusto deleniti, sed maxime reiciendis libero. Error corporis
-        consequatur repudiandae rem! Eum magni assumenda laborum voluptatem
-        nobis dolorum! Quos mollitia vel corporis voluptatum molestias. Nemo
-        reprehenderit ea neque amet?
+        {{ profile.description }}
       </div>
     </div>
-    <a href="{% url 'donate' %}" class="btn btn-primary">But me coffee</a>
+    <a href="{% url 'donate' profile.id %}" class="btn btn-primary">But me coffee</a>
   </div>
 </div>
 {% endblock %}

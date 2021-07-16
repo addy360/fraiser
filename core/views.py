@@ -1,32 +1,44 @@
+from core.models import Donation, Profile
 import uuid
 from core.utils import extract_redirect, generateReferenceNo, initiateRequest, validate_post_data
 from django.http.response import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
-from django.contrib.auth.models import User
 
  
 
 def index(request, username):
-    # user = User.objects.select_related('profile')
-    # print(user)
-    return render(request,'pages/index.html')
+    profile = Profile.objects.select_related('user').first()
+    context = { 'profile': profile }
+    return render(request,'pages/index.html', context)
 
-def donate(request):
+def donate(request, profile_id):
+    context = { "profile_id" : profile_id  }
     if request.method == "GET" :
-        return render(request,'pages/donate.html')
+        return render(request,'pages/donate.html', context)
 
     errors , clean_data = validate_post_data(request)
     if len(errors):
-        return render(request,'pages/donate.html', {"errors":errors } )
+        return render(request,'pages/donate.html', {"errors":errors, **context } )
     
+    donation = Donation()
+    donation.transaction_id = uuid.uuid4()
+    donation.reference_number = generateReferenceNo()
+    donation.amount = clean_data['amount']
+    donation.mobile =  clean_data['mobile']
+    donation.profile = Profile.objects.first()
+    donation.donator = clean_data['donator']
+
+    donation.save()
 
     payload = {
-        'amount': clean_data['amount'],
-        'reference_number':generateReferenceNo(),
-        'transaction_id': uuid.uuid4(),
+        'amount': donation.amount,
+        'reference_number':donation.reference_number,
+        'transaction_id': donation.transaction_id,
         'sendSource': True,
-        'mobile': clean_data['mobile'],
+        'mobile': donation.mobile,
     }
+
+ 
 
         
 
