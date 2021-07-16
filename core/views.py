@@ -1,18 +1,29 @@
 from core.models import Donation, Profile
 import uuid
 from core.utils import extract_redirect, generateReferenceNo, initiateRequest, validate_post_data
-from django.http.response import HttpResponse, HttpResponseServerError
+from django.http.response import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import redirect, render
 
  
 
 def index(request, username):
-    profile = Profile.objects.select_related('user').first()
+    profiles = Profile.objects.select_related('user').all()
+    profile = None
+    # Not efficient but will do for now
+    for pf in profiles:
+        if pf.user.username == username.strip()  :
+            profile = pf
+            break
+    if not profile:
+        return HttpResponseBadRequest("Bad request")
+    
     context = { 'profile': profile }
     return render(request,'pages/index.html', context)
 
 def donate(request, profile_id):
-    context = { "profile_id" : profile_id  }
+    profile = Profile.objects.select_related('user').filter(id = profile_id).first()
+    context = { "profile" : profile  }
+
     if request.method == "GET" :
         return render(request,'pages/donate.html', context)
 

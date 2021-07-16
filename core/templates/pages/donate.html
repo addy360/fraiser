@@ -7,13 +7,13 @@
   <div class="user__content">
     <div class="user__profile">
       <img
-        src="https://picsum.photos/200/300"
+        src="{{ profile.profile_img.url }}"
         alt=""
         class="user__profile--img"
       />
     </div>
     <div class="user__description">
-      <form action="{% url 'donate' 2 %}" method="post" class="form">
+      <form action="{% url 'donate' profile.id %}" method="post" class="form">
       {% csrf_token %}
         <div class="form-group">
           <label for="#">Phone number</label>

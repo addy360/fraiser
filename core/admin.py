@@ -1,8 +1,16 @@
 from core.models import Donation, Profile
 from django.contrib import admin
 
-# Register your models here.
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ('id', 'profile_img', 'user')
+    list_filter = ( 'user__username',)
 
-admin.site.register(Profile)
+class DonationAdmin(admin.ModelAdmin):
+    list_display = ('id', 'reference_number', 'transaction_id','profile')
+    list_filter = ( 'profile',)
 
-admin.site.register(Donation)
+
+
+admin.site.register(Profile, ProfileAdmin)
+
+admin.site.register(Donation, DonationAdmin)
