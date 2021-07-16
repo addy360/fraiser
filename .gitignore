@@ -222,3 +222,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+uploads/*
+
+*/migrations/*.py

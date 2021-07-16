@@ -2,10 +2,13 @@ import uuid
 from core.utils import extract_redirect, generateReferenceNo, initiateRequest, validate_post_data
 from django.http.response import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
+from django.contrib.auth.models import User
 
  
 
-def index(request):
+def index(request, username):
+    # user = User.objects.select_related('profile')
+    # print(user)
     return render(request,'pages/index.html')
 
 def donate(request):
