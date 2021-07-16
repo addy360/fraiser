@@ -1,7 +1,7 @@
 from core.models import Donation, Profile
 import uuid
 from core.utils import extract_redirect, generateReferenceNo, initiateRequest, validate_post_data
-from django.http.response import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseServerError
+from django.http.response import  HttpResponse, HttpResponseBadRequest, HttpResponseServerError
 from django.shortcuts import redirect, render
 
  
