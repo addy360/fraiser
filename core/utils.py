@@ -2,6 +2,8 @@ import base64
 import requests
 import json
 import keys
+import time
+import math
 
 def encodeToB6(val):
     return base64.b64encode( bytes(val,'utf8')).decode('utf8')
@@ -126,6 +128,9 @@ def extract_redirect(res):
         return False
 
    
+def generateReferenceNo():
+   
+    return f'{keys.PATTERN_NAME}_{ math.floor(time.time()) }' 
 
 
     

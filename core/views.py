@@ -1,5 +1,5 @@
 import uuid
-from core.utils import extract_redirect, initiateRequest, validate_post_data
+from core.utils import extract_redirect, generateReferenceNo, initiateRequest, validate_post_data
 from django.http.response import HttpResponse, HttpResponseServerError
 from django.shortcuts import redirect, render
 
@@ -16,9 +16,10 @@ def donate(request):
     if len(errors):
         return render(request,'pages/donate.html', {"errors":errors } )
     
+
     payload = {
         'amount': clean_data['amount'],
-        'reference_number': 'ADIL_1234',
+        'reference_number':generateReferenceNo(),
         'transaction_id': uuid.uuid4(),
         'sendSource': True,
         'mobile': clean_data['mobile'],

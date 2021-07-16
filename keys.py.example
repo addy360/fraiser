@@ -1,2 +1,3 @@
 API_KEY =""
 API_SECRET =""
+PATTERN_NAME =  # should be the same as filled at pattern match ( beem dashboard )
