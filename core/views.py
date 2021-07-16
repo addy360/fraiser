@@ -14,8 +14,7 @@ def donate(request):
 
     errors , clean_data = validate_post_data(request)
     if len(errors):
-        print(errors)
-        return HttpResponse('Validation errors')
+        return render(request,'pages/donate.html', {"errors":errors } )
     
     payload = {
         'amount': clean_data['amount'],
