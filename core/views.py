@@ -32,7 +32,7 @@ def donate(request):
 
     if not redirect_url:
         # Probably some nice UI for a user but this will do for now
-        return HttpResponseServerError("Something went wrong, If the problem persists, You are deninatelly doing something wrong")
+        return HttpResponseServerError("Something went wrong, If the problem persists, You are definitely doing something wrong")
 
         
 
