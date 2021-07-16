@@ -1,4 +1,8 @@
-{% extends 'layout/base.html' %} {% block content %}
+{% extends 'layout/base.html' %} 
+
+{% block title %} | Donate {% endblock title %}
+
+{% block content %}
 <div class="user">
   <div class="user__content">
     <div class="user__profile">
@@ -9,22 +13,23 @@
       />
     </div>
     <div class="user__description">
-      <form action="#" method="post" class="form">
+      <form action="{% url 'donate' %}" method="post" class="form">
+      {% csrf_token %}
         <div class="form-group">
           <label for="#">Phone number</label>
-          <input type="tel" placeholder="your phone number" />
+          <input type="tel" name = "mobile" placeholder="your phone number" />
         </div>
         <div class="form-group">
           <label for="#">Amount</label>
-          <input type="number" placeholder="Tanzanian shillings" />
+          <input type="number" name ="amount" placeholder="Tanzanian shillings" />
         </div>
         <div class="form-group">
           <label for="#">Your name</label>
-          <input type="text" placeholder="You can donate as anonymous too" />
+          <input type="text" name = "donator" placeholder="You can donate as anonymous too" />
         </div>
         <div class="form-group mt">
-          <a href="index.html" class="btn btn-primary btn-block"
-            >But me coffee</a
+          <button class="btn btn-primary btn-block"
+            >Donate</button
           >
         </div>
       </form>
